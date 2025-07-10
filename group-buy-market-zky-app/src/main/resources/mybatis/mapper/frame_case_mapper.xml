@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zky.infrastructure.dao.IGroupBuyActivityDao">
 
-    <resultMap id="dataMap" type="com.zky.infrastructure.dao.po.GroupBuyActivity">
+    <resultMap id="dataMap" type="  com.zky.infrastructure.dao.po.GroupBuyActivity">
         <id column="id" property="id"/>
         <result column="activity_id" property="activityId"/>
         <result column="activity_name" property="activityName"/>
