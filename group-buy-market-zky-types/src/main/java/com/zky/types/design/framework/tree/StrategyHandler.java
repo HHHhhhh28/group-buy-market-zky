@@ -2,7 +2,7 @@ package com.zky.types.design.framework.tree;
 
 /**
  * @author : zky
- * @description : 策略处理器
+ * @description : 受理策略处理
  * T 入参类型
  * D 上下文参数
  * R 返参类型
