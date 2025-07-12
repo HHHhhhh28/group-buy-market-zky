@@ -1,5 +1,6 @@
 package com.zky.infrastructure.dao.po;
 
+import com.zky.domain.activity.model.valobj.DiscountTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,7 +38,7 @@ public class GroupBuyDiscount {
     /**
      * 折扣类型（0:base、1:tag）
      */
-    private Byte discountType;
+    private Integer discountType;
 
     /**
      * 营销优惠计划（ZJ:直减、MJ:满减、N元购）
