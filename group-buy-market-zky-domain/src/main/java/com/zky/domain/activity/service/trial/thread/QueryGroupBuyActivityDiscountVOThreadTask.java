@@ -2,6 +2,7 @@ package com.zky.domain.activity.service.trial.thread;
 
 import com.zky.domain.activity.adapter.repository.IActivityRepository;
 import com.zky.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
+import com.zky.domain.activity.model.valobj.SCSkuActivityVO;
 
 import javax.annotation.Resource;
 import java.util.concurrent.Callable;
@@ -23,20 +24,27 @@ public class QueryGroupBuyActivityDiscountVOThreadTask implements Callable<Group
      */
     private final String channel;
 
+    private final String goodsId;
+
     /**
      * 活动仓储
      */
     private final IActivityRepository activityRepository;
 
-    public QueryGroupBuyActivityDiscountVOThreadTask(String source, String channel, IActivityRepository activityRepository) {
+    public QueryGroupBuyActivityDiscountVOThreadTask(String source, String channel,String goodsId, IActivityRepository activityRepository) {
         this.source = source;
         this.channel = channel;
+        this.goodsId = goodsId;
         this.activityRepository = activityRepository;
     }
 
     @Override
     public GroupBuyActivityDiscountVO call() throws Exception {
-        return activityRepository.queryGroupBuyActivityDiscountVO(source, channel);
+        SCSkuActivityVO scSkuActivityVO = activityRepository.querySCSkuActivityByGoodsId(source, channel,goodsId);
+        if(scSkuActivityVO == null){
+            return null;
+        }
+        return activityRepository.queryGroupBuyActivityDiscountVO(scSkuActivityVO.getActivityId());
     }
 }
 
