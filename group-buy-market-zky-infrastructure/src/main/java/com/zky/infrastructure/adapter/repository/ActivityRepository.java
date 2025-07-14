@@ -13,6 +13,8 @@ import com.zky.infrastructure.dao.po.GroupBuyActivity;
 import com.zky.infrastructure.dao.po.GroupBuyDiscount;
 import com.zky.infrastructure.dao.po.SCSkuActivity;
 import com.zky.infrastructure.dao.po.Sku;
+import com.zky.infrastructure.redis.IRedisService;
+import org.redisson.api.RBitSet;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -33,12 +35,14 @@ public class ActivityRepository implements IActivityRepository {
     private ISkuDao skuDao;
     @Resource
     private ISCSkuActivityDao skuActivityDao;
+    @Resource
+    private IRedisService redisService;
 
     @Override
     public GroupBuyActivityDiscountVO queryGroupBuyActivityDiscountVO(Long activityId) {
 
         GroupBuyActivity groupBuyActivityRes = groupBuyActivityDao.queryValidGroupBuyActivityId(activityId);
-        if(groupBuyActivityRes == null){
+        if (groupBuyActivityRes == null) {
             return null;
         }
 
@@ -46,7 +50,7 @@ public class ActivityRepository implements IActivityRepository {
 
         GroupBuyDiscount groupBuyDiscountRes = groupBuyDiscountDao.queryGroupBuyActivityDiscountByDiscountId(discountId);
 
-        if(groupBuyDiscountRes == null){
+        if (groupBuyDiscountRes == null) {
             return null;
         }
 
@@ -78,7 +82,7 @@ public class ActivityRepository implements IActivityRepository {
     @Override
     public SkuVO querySkuByGoodsId(String goodsId) {
         Sku sku = skuDao.querySkuByGoodsId(goodsId);
-        if(sku == null){
+        if (sku == null) {
             return null;
         }
         return SkuVO.builder()
@@ -95,7 +99,7 @@ public class ActivityRepository implements IActivityRepository {
         scSkuActivityReq.setChannel(channel);
         scSkuActivityReq.setGoodsId(goodsId);
         SCSkuActivity scSkuActivity = skuActivityDao.querySCSkuActivityByGoodsId(scSkuActivityReq);
-        if(scSkuActivity == null){
+        if (scSkuActivity == null) {
             return null;
         }
 
@@ -105,6 +109,16 @@ public class ActivityRepository implements IActivityRepository {
                 .activityId(scSkuActivity.getActivityId())
                 .goodsId(scSkuActivity.getGoodsId())
                 .build();
+    }
+
+    @Override
+    public boolean isTagCrowdRange(String tagId, String userId) {
+        RBitSet bitSet = redisService.getBitSet(tagId);
+        if (!bitSet.isExists()) {
+            return true;
+        }
+
+        return bitSet.get(redisService.getIndexFromUserId(userId));
     }
 }
 
