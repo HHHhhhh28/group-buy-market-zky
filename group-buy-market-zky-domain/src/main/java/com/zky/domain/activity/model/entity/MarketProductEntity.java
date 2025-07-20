@@ -15,14 +15,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MarketProductEntity {
-
-    /** 用户ID */
+    /**
+     * 活动ID
+     */
+    private Long activityId;
+    /**
+     * 用户ID
+     */
     private String userId;
-    /** 商品ID */
+    /**
+     * 商品ID
+     */
     private String goodsId;
-    /** 渠道 */
+    /**
+     * 渠道
+     */
     private String source;
-    /** 来源 */
+    /**
+     * 来源
+     */
     private String channel;
 
 }
