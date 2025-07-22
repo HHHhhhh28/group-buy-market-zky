@@ -1,8 +1,11 @@
 package com.zky.domain.activity.service.discount;
 
+import com.zky.domain.activity.adapter.repository.IActivityRepository;
 import com.zky.domain.activity.model.valobj.DiscountTypeEnum;
 import com.zky.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -10,14 +13,19 @@ import java.math.BigDecimal;
  * @description :
  * @createDate : 2025/7/11 18:25
  */
+@Slf4j
 public abstract class AbstractDiscountCalculateService implements IDiscountCalculateService {
 
 
+    @Resource
+    protected IActivityRepository repository;
     @Override
     public BigDecimal calculate(String userId, BigDecimal originalPrice, GroupBuyActivityDiscountVO.GroupBuyDiscount groupBuyDiscount) {
         if (DiscountTypeEnum.TAG.equals(groupBuyDiscount.getDiscountType())) {
             boolean isCrowdRange = filterTagId(userId, groupBuyDiscount.getTagId());
             if (!isCrowdRange) {
+                log.info("折扣优惠计算拦截，用户不再优惠人群标签范围内 userId:{}", userId);
+
                 return originalPrice;
             }
         }
@@ -26,7 +34,7 @@ public abstract class AbstractDiscountCalculateService implements IDiscountCalcu
 
 
     private boolean filterTagId(String userId, String tagId) {
-        return true;
+        return repository.isTagCrowdRange(tagId, userId);
     }
 
     protected abstract BigDecimal doCalculate(BigDecimal originalPrice, GroupBuyActivityDiscountVO.GroupBuyDiscount groupBuyDiscount);
