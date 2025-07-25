@@ -6,7 +6,6 @@ import com.zky.domain.trade.model.entity.*;
 import com.zky.domain.trade.model.valobj.GroupBuyProgressVO;
 import com.zky.domain.trade.service.factory.TradeRuleFilterFactory;
 import com.zky.types.design.framework.link.model2.chain.BusinessLinkedList;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
