@@ -11,7 +11,7 @@ import com.zky.domain.trade.model.valobj.GroupBuyProgressVO;
  * @description :
  * @createDate : 2025/7/17 18:07
  */
-public interface ITradeOrderService {
+public interface ITradeLockOrderService {
     /**
      * 查询，未被支付消费完成的营销优惠订单
      *

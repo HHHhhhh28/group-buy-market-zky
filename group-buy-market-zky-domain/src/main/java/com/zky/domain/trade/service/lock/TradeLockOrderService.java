@@ -1,10 +1,11 @@
-package com.zky.domain.trade.service;
+package com.zky.domain.trade.service.lock;
 
 import com.zky.domain.trade.adapter.repository.ITradeRepository;
 import com.zky.domain.trade.model.aggregate.GroupBuyOrderAggregate;
 import com.zky.domain.trade.model.entity.*;
 import com.zky.domain.trade.model.valobj.GroupBuyProgressVO;
-import com.zky.domain.trade.service.factory.TradeRuleFilterFactory;
+import com.zky.domain.trade.service.ITradeLockOrderService;
+import com.zky.domain.trade.service.lock.factory.TradeRuleFilterFactory;
 import com.zky.types.design.framework.link.model2.chain.BusinessLinkedList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Service
-public class TradeOrderService implements ITradeOrderService {
+public class TradeLockOrderService implements ITradeLockOrderService {
     @Resource
     private ITradeRepository repository;
     @Resource

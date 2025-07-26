@@ -14,7 +14,7 @@ import com.zky.domain.trade.model.entity.PayActivityEntity;
 import com.zky.domain.trade.model.entity.PayDiscountEntity;
 import com.zky.domain.trade.model.entity.UserEntity;
 import com.zky.domain.trade.model.valobj.GroupBuyProgressVO;
-import com.zky.domain.trade.service.ITradeOrderService;
+import com.zky.domain.trade.service.ITradeLockOrderService;
 import com.zky.types.enums.ResponseCode;
 import com.zky.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class MarketTradeController implements IMarketTradeService {
     private IIndexGroupBuyMarketService indexGroupBuyMarketService;
 
     @Resource
-    private ITradeOrderService tradeOrderService;
+    private ITradeLockOrderService tradeOrderService;
 
 
     @RequestMapping(value = "lock_market_pay_order", method = RequestMethod.POST)

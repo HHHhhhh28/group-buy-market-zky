@@ -1,11 +1,10 @@
-package com.zky.domain.trade.service.filter;
+package com.zky.domain.trade.service.lock.filter;
 
-import com.zky.domain.activity.adapter.repository.IActivityRepository;
 import com.zky.domain.trade.adapter.repository.ITradeRepository;
 import com.zky.domain.trade.model.entity.GroupBuyActivityEntity;
 import com.zky.domain.trade.model.entity.TradeRuleCommandEntity;
 import com.zky.domain.trade.model.entity.TradeRuleFilterBackEntity;
-import com.zky.domain.trade.service.factory.TradeRuleFilterFactory;
+import com.zky.domain.trade.service.lock.factory.TradeRuleFilterFactory;
 import com.zky.types.design.framework.link.model2.handler.ILogicHandler;
 import com.zky.types.enums.ActivityStatusEnumVO;
 import com.zky.types.enums.ResponseCode;
