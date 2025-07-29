@@ -41,7 +41,7 @@ public class TradeSettlementOrderService implements ITradeSettlementOrderService
 
         String teamId = tradeSettlementRuleFilterBackEntity.getTeamId();
 
-        // 2. 查询组团信息
+        // 2.  查询组团信息
         GroupBuyTeamEntity groupBuyTeamEntity = GroupBuyTeamEntity.builder()
                 .teamId(tradeSettlementRuleFilterBackEntity.getTeamId())
                 .activityId(tradeSettlementRuleFilterBackEntity.getActivityId())
