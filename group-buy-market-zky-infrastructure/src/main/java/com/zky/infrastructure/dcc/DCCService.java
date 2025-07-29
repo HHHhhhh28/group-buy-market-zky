@@ -1,11 +1,15 @@
 package com.zky.infrastructure.dcc;
 
 import com.zky.types.annotations.DCCValue;
+import com.zky.types.common.Constants;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : zky
- * @description :
+ * @description : 动态配置服务
  * @createDate : 2025/7/14 22:04
  */
 @Service
@@ -15,6 +19,8 @@ public class DCCService {
     private String downgradeSwitch;
     @DCCValue("cutRange:100")
     private String cutRange;
+    @DCCValue("scBlacklist:s02c02")
+    private String scBlacklist;
 
     public boolean isDowngradeSwitch() {
         return "1".equals(downgradeSwitch);
@@ -27,6 +33,13 @@ public class DCCService {
             return true;
         }
         return false;
+    }
+    /**
+     * 判断黑名单拦截渠道，true 拦截、false 放行
+     */
+    public boolean isSCBlackIntercept(String source, String channel) {
+        List<String> list = Arrays.asList(scBlacklist.split(Constants.SPLIT));
+        return list.contains(source + channel);
     }
 }
 
