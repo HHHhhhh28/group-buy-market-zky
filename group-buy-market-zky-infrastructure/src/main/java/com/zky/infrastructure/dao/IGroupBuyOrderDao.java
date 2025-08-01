@@ -2,6 +2,7 @@ package com.zky.infrastructure.dao;
 
 import com.zky.infrastructure.dao.po.GroupBuyOrder;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,7 @@ public interface IGroupBuyOrderDao {
 
     int updateOrderStatus2COMPLETE(String teamId);
 
-    List<GroupBuyOrder> queryGroupBuyProgressByTeamIds(Set<String> teamIds);
+    List<GroupBuyOrder> queryGroupBuyProgressByTeamIds(@Param("teamIds") Set<String> teamIds);
 
     Integer queryAllTeamCount(Set<String> teamIds);
 
