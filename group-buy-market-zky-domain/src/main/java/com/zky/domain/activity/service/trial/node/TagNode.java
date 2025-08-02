@@ -32,11 +32,11 @@ public class TagNode extends AbstractGroupBuyMarketSupport<MarketProductEntity, 
         if (StringUtils.isBlank(tagId)) {
             dynamicContext.setVisible(true);
             dynamicContext.setEnable(true);
-            router(requestParameter, dynamicContext);
+            return router(requestParameter, dynamicContext);
         }
 
         // 是否在人群范围内；visible、enable 如果值为 ture 则表示没有配置拼团限制，那么就直接保证为 true 即可
-        boolean isWithin = repository.isTagCrowdRange(tagId,requestParameter.getUserId());
+        boolean isWithin = repository.isTagCrowdRange(tagId, requestParameter.getUserId());
         dynamicContext.setVisible(visible || isWithin);
         dynamicContext.setEnable(enable || isWithin);
 
